@@ -28,6 +28,13 @@ h2{
     place-items: center;
     padding: 20px;
 }
+.containerfavorites {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    place-items: center;
+    padding: 20px;
+}
 .container .image {
     border-radius: 20 px;
     margin: 5 px;
