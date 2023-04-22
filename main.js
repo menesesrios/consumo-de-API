@@ -1,6 +1,6 @@
 const API_URL_RANDOM = 'https://api.thedogapi.com/v1/images/search?limit=2&api_key=live_3wgPVjpBH1k7ZgC42RrKcQuhQAQJ0DSWMLEdquC0wjxfEAdMkUcn5HYe1bCFJSbM';
-const API_URL_FAVORITES = 'https://api.thedogapi.com/v1/favourites?api_key=live_3wgPVjpBH1k7ZgC42RrKcQuhQAQJ0DSWMLEdquC0wjxfEAdMkUcn5HYe1bCFJSbM';
-const API_URL_FAVORITES_DELETE = (id) => `https://api.thedogapi.com/v1/favourites/${id}?api_key=live_3wgPVjpBH1k7ZgC42RrKcQuhQAQJ0DSWMLEdquC0wjxfEAdMkUcn5HYe1bCFJSbM`;
+const API_URL_FAVORITES = 'https://api.thedogapi.com/v1/favourites';
+const API_URL_FAVORITES_DELETE = (id) => `https://api.thedogapi.com/v1/favourites/${id}`;
 
 const spanError = document.getElementById('error')
 
@@ -27,7 +27,13 @@ async function loadRandomDogs (){
 }
 
 async function loadFavoritesDogs (){
-    const res = await fetch(API_URL_FAVORITES);
+    const res = await fetch(API_URL_FAVORITES, {
+        method: 'GET',
+        headers:{
+           'X-API-KEY':'live_3wgPVjpBH1k7ZgC42RrKcQuhQAQJ0DSWMLEdquC0wjxfEAdMkUcn5HYe1bCFJSbM',
+        },
+    });
+
     const data = await res.json();
     console.log('favorites')
     console.log(data)
@@ -69,6 +75,7 @@ async function saveFavouriteDog(id){
         method: 'POST',
         headers:{
             'Content-Type': 'application/json',
+            'X-API-KEY' : 'live_3wgPVjpBH1k7ZgC42RrKcQuhQAQJ0DSWMLEdquC0wjxfEAdMkUcn5HYe1bCFJSbM'
         },
         body: JSON.stringify ({
             image_id: id
@@ -90,6 +97,9 @@ async function saveFavouriteDog(id){
 async function deleteFavoriteDog(id) {
     const res = await fetch(API_URL_FAVORITES_DELETE (id),{
         method: 'DELETE',
+        headers:{
+            'X-API-KEY' : 'live_3wgPVjpBH1k7ZgC42RrKcQuhQAQJ0DSWMLEdquC0wjxfEAdMkUcn5HYe1bCFJSbM'
+        }
     });
     const data = await res.json();
 
